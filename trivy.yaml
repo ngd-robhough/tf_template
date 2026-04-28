@@ -1,0 +1,20 @@
+# General configuration
+quiet: true
+format: table
+severity:
+  - HIGH
+  - CRITICAL
+exit-code: 0  # Fails the build if issues are found
+
+# Misconfiguration specific settings
+misconfiguration:
+  scanners:
+    - terraform
+  include-non-failures: false
+
+# Terraform specific settings
+terraform:
+  # Optionally provide tfvars files to override variables during scanning
+  tfvars:
+    - ./env/dev/dev.tfvars
+    - ./env/prod/prod.tfvars
