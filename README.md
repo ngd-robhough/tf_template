@@ -9,14 +9,14 @@ Basic starter layout for Terraform projects with a workspace-first workflow. Inc
 - Provide a clean baseline that can be extended for any provider.
 
 ## Structure
-```
+```text
 .
 |-- backend/
 |   |-- dev.hcl
-|   `-- prod.hcl
+|   |-- prod.hcl
 |-- env/
 |   |-- dev.tfvars
-|   `-- prod.tfvars
+|   |-- prod.tfvars
 |-- backend.tf
 |-- main.tf
 |-- providers.tf
@@ -24,7 +24,7 @@ Basic starter layout for Terraform projects with a workspace-first workflow. Inc
 |-- outputs.tf
 |-- versions.tf
 |-- .pre-commit-config.yaml
--- .gitignore
+|-- .gitignore
 ```
 
 ## Workspace workflow
@@ -35,20 +35,24 @@ Basic starter layout for Terraform projects with a workspace-first workflow. Inc
 
 Example using Bash:
 
+```bash
 terraform init -backend-config="backend/dev.hcl"
 terraform workspace new dev || true
 terraform workspace select dev
 terraform plan -var-file="env/$(terraform workspace show).tfvars"
 terraform apply -var-file="env/$(terraform workspace show).tfvars"
+```
 
 Example using PowerShell:
 
+```powershell
 terraform init -backend-config="backend/dev.hcl"
 terraform workspace select dev
 if ($LASTEXITCODE -ne 0) { terraform workspace new dev }
 $ws = terraform workspace show
 terraform plan -var-file="env/$ws.tfvars"
 terraform apply -var-file="env/$ws.tfvars"
+```
 
 ## Notes
 
@@ -72,8 +76,8 @@ If aws_assume_role_session_name is not set, the default is terraform-<workspace>
 
 Use one backend file per environment and run init with the matching file:
 
-- dev workspace: terraform init -backend-config="backend/dev.hcl"
-- prod workspace: terraform init -backend-config="backend/prod.hcl"
+- dev workspace: `terraform init -backend-config="backend/dev.hcl"`
+- prod workspace: `terraform init -backend-config="backend/prod.hcl"`
 
 Set real values for bucket, region, and dynamodb_table in backend/*.hcl before first use.
 
@@ -86,18 +90,22 @@ This template includes a pre-commit configuration that runs:
 - tflint
 - trivy (Terraform misconfiguration scan)
 
-Install and enable the hook:
-
 Install required tools first:
 
+```bash
 tflint --version
 trivy --version
+```
 
 Then install and enable pre-commit:
 
+```bash
 pip install pre-commit
 pre-commit install
+```
 
 Run against all files:
 
+```bash
 pre-commit run --all-files
+```
