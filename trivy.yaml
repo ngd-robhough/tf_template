@@ -16,5 +16,5 @@ misconfiguration:
 terraform:
   # Optionally provide tfvars files to override variables during scanning
   tfvars:
-    - ./env/dev/dev.tfvars
-    - ./env/prod/prod.tfvars
+    - ./env/dev.tfvars
+    - ./env/prod.tfvars
