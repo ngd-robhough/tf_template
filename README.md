@@ -1,6 +1,6 @@
 # Terraform Starter Template
 
-Basic starter layout for Terraform projects with a workspace-first workflow.
+Basic starter layout for Terraform projects with a workspace-first workflow. Includes terraform fmt, validate, trivy and tflint pre-commit hooks. These are items that should not be after-thoughts, but "standard" for every project.
 
 ## Goals
 
@@ -9,7 +9,7 @@ Basic starter layout for Terraform projects with a workspace-first workflow.
 - Provide a clean baseline that can be extended for any provider.
 
 ## Structure
-
+```
 .
 |-- backend/
 |   |-- dev.hcl
@@ -24,7 +24,8 @@ Basic starter layout for Terraform projects with a workspace-first workflow.
 |-- outputs.tf
 |-- versions.tf
 |-- .pre-commit-config.yaml
-`-- .gitignore
+-- .gitignore
+```
 
 ## Workspace workflow
 
